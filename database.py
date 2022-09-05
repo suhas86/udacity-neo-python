@@ -67,7 +67,6 @@ class NEODatabase:
         :param designation: The primary designation of the NEO to search for.
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
-
         try:
             return self.neo_by_designation[designation]
         except KeyError:
@@ -87,7 +86,6 @@ class NEODatabase:
         :param name: The name, as a string, of the NEO to search for.
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
-
         try:
             return self.neo_by_name[name]
         except KeyError:
@@ -107,7 +105,6 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-
         if filters:
             for approach in self._approaches:
                 is_match = all(_filter(approach) for _filter in filters)

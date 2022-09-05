@@ -41,7 +41,6 @@ class NearEarthObject:
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
         """
-
         # onto attributes named `designation`, `name`, `diameter`, and `hazardous`.
         # You should coerce these values to their appropriate data type and
         # handle any edge cases, such as a empty name being represented by `None`
@@ -67,7 +66,6 @@ class NearEarthObject:
 
     def __str__(self):
         """Return `str(self)`."""
-
         # The project instructions include one possibility. Peek at the __repr__
         # method for examples of advanced string formatting.
         if math.isnan(self.diameter):
@@ -81,6 +79,7 @@ class NearEarthObject:
                f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r})"
 
     def serialize(self):
+        """Return a dict representation of self attributes."""
         return {'designation': self.designation, 'name': self.name, 'diameter_km': self.diameter, 'potentially_hazardous': self.hazardous}
 
 
@@ -104,7 +103,6 @@ class CloseApproach:
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
         """
-
         # onto attributes named `_designation`, `time`, `distance`, and `velocity`.
         # You should coerce these values to their appropriate data type and handle any edge cases.
         # The `cd_to_datetime` function will be useful.
@@ -135,14 +133,12 @@ class CloseApproach:
         formatted string that can be used in human-readable representations and
         in serialization to CSV and JSON files.
         """
-
         # build a formatted representation of the approach time.
 
         return datetime_to_str(self.time)
 
     def __str__(self):
         """Return `str(self)`."""
-
         # The project instructions include one possibility. Peek at the __repr__
         # method for examples of advanced string formatting.
         return f"At {self.time_str}, '{self.neo.fullname}' approaches Earth at a distance of {self.distance: .2f} au and a velocity of {self.velocity:.2f} km/s."
@@ -153,4 +149,5 @@ class CloseApproach:
                f"velocity={self.velocity:.2f}, neo={self.neo!r})"
 
     def serialize(self):
+        """Return a dict representation of self attributes."""
         return {'datetime_utc': datetime_to_str(self.time), 'distance_au': self.distance, 'velocity_km_s': self.velocity}

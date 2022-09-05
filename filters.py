@@ -71,38 +71,54 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Repr method used to compare filter attribute."""
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 # sub filters
 
 
 class DateFilter(AttributeFilter):
+    """Subclass to filter by date."""
+
     @classmethod
     def get(cls, approach):
+        """Get the date."""
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
+    """Subclass to filter by distance."""
+
     @classmethod
     def get(cls, approach):
+        """Get the distance."""
         return approach.distance
 
 
 class VelocityFilter(AttributeFilter):
+    """Subclass to filter by velocity."""
+
     @classmethod
     def get(cls, approach):
+        """Get the velocity."""
         return approach.velocity
 
 
 class DiameterFilter(AttributeFilter):
+    """Subclass to filter by diameter."""
+
     @classmethod
     def get(cls, approach):
+        """Get the diameter."""
         return approach.neo.diameter
 
 
 class HazardousFilter(AttributeFilter):
+    """Subclass to filter by hazard."""
+
     @classmethod
     def get(cls, approach):
+        """Get the hazardous."""
         return approach.neo.hazardous
 
 
@@ -142,7 +158,6 @@ def create_filters(
     :param hazardous: Whether the NEO of a matching `CloseApproach` is potentially hazardous.
     :return: A collection of filters for use with `query`.
     """
-
     filters = []
     if date:
         filters.append(DateFilter(operator.eq, date))
@@ -176,7 +191,6 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-
     if n == 0 or n is None:
         return iterator
     else:
