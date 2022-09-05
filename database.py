@@ -21,6 +21,7 @@ class NEODatabase:
     help fetch NEOs by primary designation or by name and to help speed up
     querying for close approaches that match criteria.
     """
+
     def __init__(self, neos, approaches):
         """Create a new `NEODatabase`.
 
@@ -51,9 +52,7 @@ class NEODatabase:
 
         for approach in approaches:
             approach.neo = self.neo_by_designation[approach._designation]
-            approach.neo.approaches.append(approach)           
-
-        
+            approach.neo.approaches.append(approach)
 
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.
@@ -68,11 +67,11 @@ class NEODatabase:
         :param designation: The primary designation of the NEO to search for.
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
-        
+
         try:
             return self.neo_by_designation[designation]
         except KeyError:
-            return None    
+            return None
 
     def get_neo_by_name(self, name):
         """Find and return an NEO by its name.
@@ -88,11 +87,11 @@ class NEODatabase:
         :param name: The name, as a string, of the NEO to search for.
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
-        
+
         try:
             return self.neo_by_name[name]
         except KeyError:
-            return None 
+            return None
 
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
@@ -108,12 +107,12 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-        
+
         if filters:
             for approach in self._approaches:
                 is_match = all(_filter(approach) for _filter in filters)
                 if is_match:
                     yield approach
         else:
-             for approach in self._approaches:
-                yield approach   
+            for approach in self._approaches:
+                yield approach
